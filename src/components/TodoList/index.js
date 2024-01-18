@@ -31,7 +31,7 @@ export default function TodoList() {
         {/* <Todo name='Learn React' priority='High' />
         <Todo name='Learn Redux' priority='Medium' />
         <Todo name='Learn JavaScript' priority='Low' /> */}
-        {todoList.map(todo => <Todo key={todo.id} name={todo.name} priority={todo.priority} />)}
+        {todoList.map(todo => <Todo key={todo.id} name={todo.name} priority={todo.priority} completed={todo.completed} />)}
       </Col>
       <Col span={24}>
         <Input.Group style={{ display: 'flex' }} compact>
