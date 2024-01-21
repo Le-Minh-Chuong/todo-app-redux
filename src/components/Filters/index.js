@@ -1,13 +1,15 @@
 import { Col, Input, Radio, Row, Select, Tag, Typography } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchFilterChange } from '../../redux/action';
+import { prioritiesFilterChange, searchFilterChange, statusFilterChange } from '../../redux/action';
 
 const { Search } = Input;
 
 export default function Filters() {
   const [searchText, setSearchText] = useState('')
   const [filterStatus, setFilterStatus] = useState('All')
+  const [filterPriorities, setFilterPriorities] = useState([])
+
   const dispatch = useDispatch()
 
   const handleSearchText = (e) => {
@@ -18,7 +20,12 @@ export default function Filters() {
   const handleStatusChange = (e) => {
     console.log(e.target.value)
     setFilterStatus(e.target.value)
-    dispatch()
+    dispatch(statusFilterChange(e.target.value))
+  }
+
+  const handlePrioritiesChange = (value) => {
+    setFilterPriorities(value)
+    dispatch(prioritiesFilterChange(value))
   }
 
   return (
@@ -54,6 +61,8 @@ export default function Filters() {
           allowClear
           placeholder='Please select'
           style={{ width: '100%' }}
+          value={filterPriorities}
+          onChange={handlePrioritiesChange}
         >
           <Select.Option value='High' label='High'>
             <Tag color='red'>High</Tag>
