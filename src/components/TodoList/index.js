@@ -2,9 +2,9 @@ import { Button, Col, Input, Row, Select, Tag } from 'antd';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 } from 'uuid';
-import { addTodo } from '../../redux/action';
 import { todosRemainingSelector } from '../../redux/selectors';
 import Todo from '../Todo';
+import { todoListSlice } from './todoListSlice';
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export default function TodoList() {
   const todoList = useSelector(todosRemainingSelector)
 
   const handleAddTodo = () => {
-    dispatch(addTodo({
+    dispatch(todoListSlice.actions.addTodo({
       id: v4(),
       name: input,
       priority: priority,
@@ -33,7 +33,7 @@ export default function TodoList() {
       <Col span={24}>
         <Input.Group style={{ display: 'flex' }} compact>
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
-          <Select defaultValue="Medium" value={priority} onChange={(value) => {setPriority(value)}}>
+          <Select defaultValue="Medium" value={priority} onChange={(value) => { setPriority(value) }}>
             <Select.Option value='High' label='High'>
               <Tag color='red'>High</Tag>
             </Select.Option>
